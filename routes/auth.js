@@ -78,7 +78,10 @@ router.post('/signup', (req, res, next) => {
 router.put('/:id/edit', (req, res, next) => {
   const newData = {
     username: req.body.username,
-    password: req.body.password
+    password: req.body.password,
+    pictureUrl: req.body.pictureUrl,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName
   }
   // this is for mongoose to automatically update the movie -goes as third parameters in findAndUpdate-
   const options = {
