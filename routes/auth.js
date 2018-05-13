@@ -75,26 +75,6 @@ router.post('/signup', (req, res, next) => {
     .catch(next);
 });
 
-router.put('/:id/edit', (req, res, next) => {
-  const newData = {
-    username: req.body.username,
-    password: req.body.password,
-    pictureUrl: req.body.pictureUrl,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName
-  }
-  // this is for mongoose to automatically update the movie -goes as third parameters in findAndUpdate-
-  const options = {
-    new: true
-  }
-  // if there is now movie with this id???
-  User.findByIdAndUpdate(req.params.id, newData, options)
-    .then((result) => {
-      res.json(result)
-    })
-    .catch(next)
-});
-
 router.post('/logout', (req, res) => {
   req.session.currentUser = null;
   return res.status(204).send();
