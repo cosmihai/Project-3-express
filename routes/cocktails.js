@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const Cocktail = require('../models/cocktail');
+const User = require('../models/user');
 
 // router.get('/search/?ingredient', (req, res, next) => {
 //   res.json(req.query.ingredient)
@@ -9,6 +10,14 @@ const Cocktail = require('../models/cocktail');
 
 router.get('/', (req, res, next) => {
   Cocktail.find({})
+    .then((result) => {
+      res.json(result)
+    })
+    .catch(next)
+});
+
+router.get('/users/:id', (req, res, next) => {
+  Cocktail.find({owner: req.params.id})
     .then((result) => {
       res.json(result)
     })
@@ -25,7 +34,26 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/create', (req, res, next) => {
-  res.json('this is the create route')
+
+  const data = {
+    name: req.body.name,
+    glass: req.body.glass,
+    category: req.body.category,
+    imageUrl: req.body.imageUrl,
+    garnish: req.body.garnish,
+    preparation: req.body.preparation,
+    ingredients: req.body.ingridientsArray,
+    owner: req.body.owner
+  }
+
+  const newCocktail = new Cocktail(data);
+
+  newCocktail.save()
+    .then((result) => {
+      res.status(201).json(result)
+    })
+    .catch(next)
+
 });
 
 router.delete('/:id/delete', (req, res, next) => {

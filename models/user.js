@@ -12,11 +12,7 @@ const userSchema = new Schema({
     default: 'https://s3.amazonaws.com/thumbnails.illustrationsource.com/huge.49.247675.JPG'
   },
   firstName: String,
-  lastName: String,
-  myCocktails: [{
-    type: ObjectId,
-    ref: 'cocktail'
-  }]
+  lastName: String
 });
 
 const User = mongoose.model('User', userSchema);

@@ -7,7 +7,10 @@ const ObjectId = Schema.Types.ObjectId;
 const cocktailSchema = new Schema({
   name: String,
   glass: String,
-  category: String,
+  category: {
+    type: String,
+    default: 'All day cocktail'
+  },
   ingredients:[
     {
     unit: String,
