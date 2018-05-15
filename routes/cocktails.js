@@ -42,7 +42,7 @@ router.post('/create', (req, res, next) => {
     imageUrl: req.body.imageUrl,
     garnish: req.body.garnish,
     preparation: req.body.preparation,
-    ingredients: req.body.ingridientsArray,
+    ingredients: req.body.ingredients,
     owner: req.body.owner
   }
 
@@ -54,6 +54,29 @@ router.post('/create', (req, res, next) => {
     })
     .catch(next)
 
+});
+
+router.put('/:id/edit', (req, res, next) => {
+  const newData = {
+    name: req.body.name,
+    glass: req.body.glass,
+    category: req.body.category,
+    imageUrl: req.body.imageUrl,
+    garnish: req.body.garnish,
+    preparation: req.body.preparation,
+    ingredients: req.body.ingredients,
+    owner: req.body.owner
+  }
+  // this is for mongoose to automatically update the user -goes as third parameters in findAndUpdate-
+  const options = {
+    new: true
+  }
+  // if there is now user with this id???
+  User.findByIdAndUpdate(req.params.id, newData, options)
+    .then((result) => {
+      res.json(result)
+    })
+    .catch(next)
 });
 
 router.delete('/:id/delete', (req, res, next) => {
@@ -70,8 +93,6 @@ router.delete('/:id/delete', (req, res, next) => {
 
 
 
-// router.get / cocktails /? ingredient
-// router.put / cocktails /: id
 
 
 
