@@ -9,7 +9,7 @@ const userSchema = new Schema({
   password: String,
   pictureUrl: {
     type:String,
-    default: 'https://s3.amazonaws.com/thumbnails.illustrationsource.com/huge.49.247675.JPG'
+    default: 'https://cdn.dribbble.com/users/1343641/screenshots/3132305/bartender_appreciation_day_1x.png'
   },
   firstName: String,
   lastName: String
