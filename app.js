@@ -15,11 +15,13 @@ const authRouter = require('./routes/auth')
 const cocktailsRouter = require('./routes/cocktails')
 const usersRouter = require('./routes/users');
 
+require('dotenv').config()
+
 const app = express();
 
 // CONNECT TO DB------
 mongoose.Promise = Promise;
-mongoose.connect('mongodb://localhost/PROJECT-3-DB', {
+mongoose.connect(process.env.MONGODB_URI, {
   keepAlive: true,
   reconnectTries: Number.MAX_VALUE
 });
@@ -27,7 +29,7 @@ mongoose.connect('mongodb://localhost/PROJECT-3-DB', {
 // --MIDDLEWARES
 app.use(cors({
   credentials: true,
-  origin: ['http://localhost:4200']
+  origin: [process.env.CLIENT_API_URL]
 }));
 
 // -----SESSIONS----
