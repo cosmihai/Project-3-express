@@ -72,7 +72,7 @@ router.put('/:id/edit', (req, res, next) => {
     new: true
   }
   // if there is now user with this id???
-  User.findByIdAndUpdate(req.params.id, newData, options)
+  Cocktail.findByIdAndUpdate(req.params.id, newData, options)
     .then((result) => {
       res.json(result)
     })
