@@ -19,7 +19,7 @@ router.get('/:id', (req, res, next) => {
     .then((result) => {
       res.json(result)
     })
-    .catch(next)
+    // .catch(next);
 });
 
 router.put('/:id/edit', (req, res, next) => {
