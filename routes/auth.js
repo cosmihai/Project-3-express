@@ -1,11 +1,11 @@
-var express = require('express');
+const express = require('express');
 const bcrypt = require('bcrypt');
-var router = express.Router();
+const router = express.Router();
 
 const User = require('../models/user');
 
 
-router.get('/me', (req, res, next) => {
+router.get('/me', (req, res) => { 
   if (req.session.currentUser) {
     res.json(req.session.currentUser);
   } else {
