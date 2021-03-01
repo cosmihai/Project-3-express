@@ -25,7 +25,7 @@ mongoose.connect(process.env.MONGODB_URI, {
   autoIndex: false
 })
   .then(res => console.log('Connected to db...')
-  .catch(err => console.log(err);
+  .catch(err => console.log(err));
 
 // --MIDDLEWARES
 app.use(cors({
