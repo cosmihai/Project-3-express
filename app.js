@@ -6,7 +6,7 @@ const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
 const mongoose = require('mongoose');
-const MongoStore = require('connect-mongo')(session);
+const MongoStore = require('connect-mongo').default;
 
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -20,12 +20,11 @@ const app = express();
 
 // CONNECT TO DB------
 mongoose.connect(process.env.MONGODB_URI, {
-  keepAlive: true,
-  reconnectTries: Number.MAX_VALUE,
-  autoIndex: false
-})
-  .then(res => console.log('Connected to db...'))
-  .catch(err => console.log(err));
+  useNewUrlParser: true,  
+  useUnifiedTopology: true, 
+  useCreateIndex: true,
+  useFindAndModify: false
+}).then(res => console.log('Connected to db...')).catch(err => console.log(err));
 
 // --MIDDLEWARES
 app.use(cors({
@@ -35,8 +34,8 @@ app.use(cors({
 
 // -----SESSIONS----
 app.use(session({
-  store: new MongoStore({
-    mongooseConnection: mongoose.connection,
+  store: MongoStore.create({
+    mongoUrl: mongoose.connection,
     ttl: 24 * 60 * 60 // 1 day
   }),
   secret: 'some-string',
@@ -78,4 +77,6 @@ app.use((err, req, res, next) => {
   }
 });
 
-module.exports = app;
+const port = process.env.PORT || 3000;
+const server = app.listen(port, console.log(`app started on port ${port} ..`));
+module.exports = server;
