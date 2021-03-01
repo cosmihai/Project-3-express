@@ -19,12 +19,13 @@ const usersRouter = require('./routes/users');
 const app = express();
 
 // CONNECT TO DB------
-mongoose.Promise = Promise;
 mongoose.connect(process.env.MONGODB_URI, {
   keepAlive: true,
   reconnectTries: Number.MAX_VALUE,
   autoIndex: false
-});
+})
+  .then(res => console.log('Connected to db...')
+  .catch(err => console.log(err);
 
 // --MIDDLEWARES
 app.use(cors({
