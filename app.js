@@ -24,7 +24,7 @@ mongoose.connect(process.env.MONGODB_URI, {
   reconnectTries: Number.MAX_VALUE,
   autoIndex: false
 })
-  .then(res => console.log('Connected to db...')
+  .then(res => console.log('Connected to db...'))
   .catch(err => console.log(err));
 
 // --MIDDLEWARES
