@@ -22,7 +22,8 @@ const app = express();
 mongoose.Promise = Promise;
 mongoose.connect(process.env.MONGODB_URI, {
   keepAlive: true,
-  reconnectTries: Number.MAX_VALUE
+  reconnectTries: Number.MAX_VALUE,
+  autoIndex: false
 });
 
 // --MIDDLEWARES
